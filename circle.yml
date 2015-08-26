@@ -13,8 +13,8 @@ test:
     - sudo dpkg -i linux-headers-3.13.0-61_3.13.0-61.100~precise1_all.deb
     - wget http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-headers-3.13.0-61-generic_3.13.0-61.100_amd64.deb
     - sudo dpkg -i linux-headers-3.13.0-61-generic_3.13.0-61.100_amd64.deb
-    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "/etc/init.d/vboxdrv setup"
     - container_id=`docker run --name hctest -d tdeheurles/vbox-vagrant sh -c " while true; do sleep 1; done"`
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "/etc/init.d/vboxdrv setup"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "mkdir /repository"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "cd /repository ; git clone http://github.com/tdeheurles/homecores"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "chmod 755 /repository/homecores/test/test.sh"
