@@ -11,6 +11,8 @@ addons:
 
 before_install:
   - docker version
+  - curl -sSL https://get.docker.com/ | sh
+  - docker version
   - cp test/nginx.Dockerfile Dockerfile
   - cp test/nginx.conf       nginx.conf
   - cp test/index.html       index.html
