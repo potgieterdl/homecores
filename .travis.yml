@@ -22,8 +22,9 @@ script:
   - container_id=`docker run -d -p 9999:8000 hctest`
   - docker ps -a
   - echo $container_id
-  - docker exec ${container_id} ls
-  - docker exec ${container_id} sh -c "mkdir /somedir"
+  - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c ls
+  - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "mkdir /somedir"
   - curl http://0.0.0.0:9999
-  - docker exec ${container_id} sh -c "echo \"exec changed me\" > /www/index.html"
+  - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "echo \"exec changed me\" > /www/index.html"
   - curl http://0.0.0.0:9999
+
