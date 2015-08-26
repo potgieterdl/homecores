@@ -10,6 +10,6 @@ dependencies:
 test:
   override:
     - container_id=`docker run -d tdeheurles/vbox-vagrant sh -c " while true; do sleep 1; done"`
-    - docker exec $container_id sh -c "mkdir /repository"
-    - docker exec $container_id sh -c "cd /repository ; git clone http://github.com/tdeheurles/homecores"
-    - docker exec $container_id sh -c "cd /repository/homecores ; ./test/test.sh"
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "mkdir /repository"
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "cd /repository ; git clone http://github.com/tdeheurles/homecores"
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "cd /repository/homecores ; ./test/test.sh"
