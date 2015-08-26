@@ -14,6 +14,7 @@ test:
     # - wget http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-headers-3.13.0-61-generic_3.13.0-61.100_amd64.deb
     # - sudo dpkg -i linux-headers-3.13.0-61-generic_3.13.0-61.100_amd64.deb
     - sudo apt-get install linux-headers-generic virtualbox-dkms
+    - /etc/init.d/vboxdrv setup
     - sudo /etc/init.d/virtualbox status
     - container_id=`docker run --name hctest -d tdeheurles/vbox-vagrant sh -c " while true; do sleep 1; done"`
     # - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "apt-get update"
