@@ -22,8 +22,8 @@ script:
   - container_id=`docker run -d -p 9999:8000 hctest`
   - docker ps -a
   - echo $container_id
-  - docker exec $container_id ls
-  - docker exec $container_id sh -c "mkdir /somedir"
+  - docker exec ${container_id} ls
+  - docker exec ${container_id} sh -c "mkdir /somedir"
   - curl http://0.0.0.0:9999
-  - docker exec $container_id sh -c "echo \"exec changed me\" > /www/index.html"
+  - docker exec ${container_id} sh -c "echo \"exec changed me\" > /www/index.html"
   - curl http://0.0.0.0:9999

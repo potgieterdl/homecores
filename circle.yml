@@ -1,0 +1,15 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker pull tdeheurles/vbox-vagrant
+
+test:
+  override:
+    - container_id=`docker run -d tdeheurles/vbox-vagrant sh -c " while true; do sleep 1; done"`
+    - docker exec $container_id sh -c "mkdir /repository"
+    - docker exec $container_id sh -c "cd /repository ; git clone http://github.com/tdeheurles/homecores"
+    - docker exec $container_id sh -c "cd /repository/homecores ; ./test/test.sh"
