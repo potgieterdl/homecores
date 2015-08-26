@@ -1,12 +1,13 @@
 sudo: required
 
 services:
-  - docker-1.8.1
+  - docker
 
 addons:
   apt:
     packages:
     - curl
+    - docker-1.8.1
 
 before_install:
   - cp test/nginx.Dockerfile Dockerfile
