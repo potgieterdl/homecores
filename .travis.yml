@@ -3,12 +3,23 @@ sudo: required
 services:
   - docker
 
+addons:
+  apt:
+    packages:
+    - curl
+
 before_install:
-  - docker pull busybox:latest
+  - cp test/nginx.Dockerfile Dockerfile
+  - cp test/nginx.conf       nginx.conf
+  - cp test/index.html       index.html
+  - docker build -t hctest .
+  - docker version
 
 script:
-  - docker run -d busybox:latest /bin/bash -c "while true; do sleep 5; done" > container_id
-  - docker version
+  - container_id=`docker run -d -p 9999:8000 hctest`
   - docker ps -a
-  - cat container_id
-  - docker exec $(cat container_id) ls
+  - echo $container_id
+  - docker exec $container_id ls
+  - docker exec $container_id sh -c "mkdir /somedir"
+  - curl http://localhost:9999
+  - docker exec $container_id sh -c "echo \"exec changed me\" > /www/index.html"
