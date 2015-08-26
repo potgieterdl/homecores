@@ -14,6 +14,8 @@ test:
     - wget http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-headers-3.13.0-61-generic_3.13.0-61.100_amd64.deb
     - sudo dpkg -i linux-headers-3.13.0-61-generic_3.13.0-61.100_amd64.deb
     - container_id=`docker run --name hctest -d tdeheurles/vbox-vagrant sh -c " while true; do sleep 1; done"`
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "apt-get update"
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "apt-get install wget"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "wget http://security.ubuntu.com/ubuntu/pool/main/l/linux-lts-trusty/linux-headers-3.13.0-61_3.13.0-61.100~precise1_all.deb"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "sudo dpkg -i linux-headers-3.13.0-61_3.13.0-61.100~precise1_all.deb"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "wget http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-headers-3.13.0-61-generic_3.13.0-61.100_amd64.deb"
