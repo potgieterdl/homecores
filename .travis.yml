@@ -19,6 +19,7 @@ script:
   - container_id=`docker run --name hctest -d -p 9999:8000 hctest`
   - docker ps -a
   - echo $container_id
+  - DOCKER_OPTS="-e lxc"
   - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c ls
   - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "mkdir /somedir"
   - curl http://0.0.0.0:9999
