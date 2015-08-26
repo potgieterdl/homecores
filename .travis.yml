@@ -10,11 +10,11 @@ addons:
     - docker-1.8.1
 
 before_install:
+  - docker version
   - cp test/nginx.Dockerfile Dockerfile
   - cp test/nginx.conf       nginx.conf
   - cp test/index.html       index.html
   - docker build -t hctest .
-  - docker version
 
 script:
   - container_id=`docker run -d -p 9999:8000 hctest`
