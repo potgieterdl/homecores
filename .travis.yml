@@ -21,5 +21,6 @@ script:
   - echo $container_id
   - docker exec $container_id ls
   - docker exec $container_id sh -c "mkdir /somedir"
-  - curl http://localhost:9999
+  - curl http://0.0.0.0:9999
   - docker exec $container_id sh -c "echo \"exec changed me\" > /www/index.html"
+  - curl http://0.0.0.0:9999
