@@ -8,6 +8,7 @@ before_install:
 
 script:
   - docker run -d ubuntu:latest /bin/bash -c "while true; do sleep 5; done" > container_id
+  - docker version
   - docker ps -a
   - cat container_id
   - docker exec $(cat container_id) ls
