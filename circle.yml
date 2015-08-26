@@ -9,10 +9,14 @@ dependencies:
 
 test:
   override:
+    - alias docker_exec="sudo lxc-attach -n \"$(docker inspect --format '{{.Id}}' hctest)\" -- bash -c "
+    - docker_exec ls
     - container_id=`docker run --name hctest -d tdeheurles/vbox-vagrant sh -c " while true; do sleep 1; done"`
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "mkdir /repository"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "cd /repository ; git clone http://github.com/tdeheurles/homecores"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "chmod 755 /repository/homecores/test/test.sh"
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "apt-get update"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "echo y | apt-get install linux-headers-3.13.0-61-generic -y"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "/etc/init.d/vboxdrv setup"
     - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "cd /repository/homecores ; ./test/test.sh"
+    - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c "VBoxManage --version" 
