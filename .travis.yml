@@ -16,7 +16,7 @@ before_install:
   - docker build -t hctest .
 
 script:
-  - container_id=`docker run -d -p 9999:8000 hctest`
+  - container_id=`docker run --name hctest -d -p 9999:8000 hctest`
   - docker ps -a
   - echo $container_id
   - sudo lxc-attach -n "$(docker inspect --format '{{.Id}}' hctest)" -- bash -c ls
