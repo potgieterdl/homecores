@@ -12,36 +12,36 @@ test:
     - sudo apt-get update                                                                                                 
     - sudo apt-get install curl -y                                                                                        
     - sudo mkdir /downloads                                                                                               
-    - sudo cd /downloads                                                                                                  
-    - sudo curl -L http://download.virtualbox.org/virtualbox/5.0.2/virtualbox-5.0_5.0.2-102096~Ubuntu~trusty_amd64.deb -O 
-    - sudo mv virtualbox-5.0_5.0.2-102096~Ubuntu~trusty_amd64.deb $vbox_pathfi /downloads/virtualbox.deb                  
+    - cd /downloads                                                                                                  
+    # - sudo curl -L http://download.virtualbox.org/virtualbox/5.0.2/virtualbox-5.0_5.0.2-102096~Ubuntu~trusty_amd64.deb -O 
+    # - sudo mv virtualbox-5.0_5.0.2-102096~Ubuntu~trusty_amd64.deb $vbox_pathfi /downloads/virtualbox.deb                  
     - sudo curl -L https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb -O                                   
     - sudo mv vagrant_1.7.4_x86_64.deb $vbox_pathfi /downloads/vagrant.deb                                                
     - sudo apt-get install dkms -y                                                                                        
     - sudo apt-get install linux-headers-generic virtualbox-dkms
-    - sudo apt-get install -y libssl1.0.0                                                                                 
-    - sudo apt-get install -y libvpx1                                                                                     
-    - sudo apt-get install -y libsdl1.2debian                                                                             
-    - sudo apt-get install -y libqtgui4                                                                                   
-    - sudo apt-get install -y libqtcore4                                                                                  
-    - sudo apt-get install -y libqt4-opengl                                                                               
-    - sudo apt-get install -y libqt4-network                                                                              
-    - sudo apt-get install -y libpython2.7                                                                                
-    - sudo apt-get install -y libgl1                                                                                      
-    - sudo apt-get install -y libgl1-mesa-glx                                                                             
-    - sudo apt-get install -y libcurl3                                                                                    
-    - sudo apt-get install -y libxcursor1                                                                                 
-    - sudo apt-get install -y libxinerama1                                                                                
-    - sudo apt-get install -y libxmu6                                                                                     
-    - sudo apt-get install -y psmisc                                                                                      
-    - sudo dpkg -i /downloads/virtualbox.deb
-    - sudo /etc/init.d/vboxdrv setup
+    # - sudo apt-get install -y libssl1.0.0                                                                                 
+    # - sudo apt-get install -y libvpx1                                                                                     
+    # - sudo apt-get install -y libsdl1.2debian                                                                             
+    # - sudo apt-get install -y libqtgui4                                                                                   
+    # - sudo apt-get install -y libqtcore4                                                                                  
+    # - sudo apt-get install -y libqt4-opengl                                                                               
+    # - sudo apt-get install -y libqt4-network                                                                              
+    # - sudo apt-get install -y libpython2.7                                                                                
+    # - sudo apt-get install -y libgl1                                                                                      
+    # - sudo apt-get install -y libgl1-mesa-glx                                                                             
+    # - sudo apt-get install -y libcurl3                                                                                    
+    # - sudo apt-get install -y libxcursor1                                                                                 
+    # - sudo apt-get install -y libxinerama1                                                                                
+    # - sudo apt-get install -y libxmu6                                                                                     
+    # - sudo apt-get install -y psmisc                                                                                      
+    # - sudo dpkg -i /downloads/virtualbox.deb
+    # - sudo /etc/init.d/vboxdrv setup
     - sudo dpkg -i /downloads/vagrant.deb
-    - sudo apt-get install -y git
-    - sudo apt-get autoremove
-    - sudo rm -rf /downloads
+    # - sudo apt-get install -y git
+    # - sudo apt-get autoremove
+    # - sudo rm -rf /downloads
     - sudo mkdir /repository
-    - cd /repository ; git clone http://github.com/tdeheurles/homecores
+    - cd /repository ; sudo git clone http://github.com/tdeheurles/homecores
     - sudo chmod 755 /repository/homecores/test/test.sh
     - cd /repository/homecores ; ./test/test.sh
 
