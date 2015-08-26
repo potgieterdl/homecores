@@ -1,6 +1,6 @@
 # homecores
 
-[![Build Status](https://travis-ci.org/tdeheurles/homecores.svg?branch=master)](https://travis-ci.org/tdeheurles/homecores)
+[![Circle CI](https://circleci.com/gh/tdeheurles/homecores.svg?style=svg)](https://circleci.com/gh/tdeheurles/homecores)
 
 ### links
 - Vagrant [documentation](https://docs.vagrantup.com/v2/)
