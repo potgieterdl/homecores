@@ -3,8 +3,8 @@
       content: |
         [Unit]
         Description=ETCD2 service
-        Requires=write_public_ip.service
-        After=write_public_ip.service
+        Requires=generate_certificates.service
+        After=generate_certificates.service
         [Service]
         EnvironmentFile=__MAIN_CONFIGURATION_PATH__/public_ip
         ExecStart=/usr/bin/etcd2                                                        \

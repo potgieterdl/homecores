@@ -2,7 +2,7 @@
       command: start
       content: |
         [Unit]
-        Description=Systemd test
+        Description=Write PublicIP Service
         [Service]
         Type=oneshot
         ExecStartPre=/usr/bin/mkdir -p __MAIN_CONFIGURATION_PATH__

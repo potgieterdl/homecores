@@ -1,0 +1,13 @@
+    - name: generate_certificates.service
+      command: start
+      content: |
+        [Unit]
+        Description=Generate Certificates
+        Requires=write_public_ip.service
+        After=write_public_ip.service
+        [Service]
+        Type=oneshot
+        EnvironmentFile=__MAIN_CONFIGURATION_PATH__/public_ip
+        ExecStart=__PROGRAMS_PATH__/generate_certificates.sh ${PUBLIC_IP} __K8S_SERVICE_IP__
+        [Install]
+        WantedBy=multi-user.target

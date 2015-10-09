@@ -24,9 +24,10 @@ echo "  Add units to cloud_config"
 . ./config.sh
 inject   $unit_folder/unit.write_public_ip.service.yml    $cloud_config_file "__WRITE_PUBLIC_IP__"
 if [[ $master_hostname == "" ]];then
-	inject $unit_folder/unit.etcd2_master.service.yml     $cloud_config_file "__ETCD2__"
-    inject $unit_folder/unit.kubelet_master.service.yml   $cloud_config_file "__KUBELET__"
-	inject $unit_folder/unit.kubectl_master.service.yml   $cloud_config_file "__KUBECTL__"
+	inject $unit_folder/unit.etcd2_master.service.yml             $cloud_config_file "__ETCD2__"
+    inject $unit_folder/unit.kubelet_master.service.yml           $cloud_config_file "__KUBELET__"
+	inject $unit_folder/unit.kubectl_master.service.yml           $cloud_config_file "__KUBECTL__"
+	inject $unit_folder/unit.generate_certificates.service.yml    $cloud_config_file "__CERTIFICATES__"
 else
  	inject $unit_folder/unit.etcd2_node.service.yml       $cloud_config_file "__ETCD2__"
     inject $unit_folder/unit.kubelet_node.service.yml     $cloud_config_file "__KUBELET__"
@@ -40,6 +41,7 @@ echo "  Add files to cloud_config"
 inject $files_folder/file.write_ip.yml                    $cloud_config_file "__FILE_WRITE_IP__"
 inject $files_folder/file.sed_kubernetes_public_ip.yml    $cloud_config_file "__FILE_WRITE_FLANNEL_PUBLIC_IP__"
 inject $files_folder/file.write_flannel_public_ip.yml     $cloud_config_file "__FILE_SED_KUBERNETES_PUBLIC_IP__"
+inject $files_folder/file.generate_certificates.yml       $cloud_config_file "__FILE_GENERATE_CERTIFICATES__"
 
 
 echo "  Add environment variables"
@@ -52,6 +54,7 @@ sed -i "s|__FLANNEL_NETWORK__|$flannel_network|g"                 $cloud_config_
 sed -i "s|__PROGRAMS_PATH__|$programs_path|g"                     $cloud_config_file
 sed -i "s|__KUBECTL_DOWNLOAD_URL__|$kubectl_download_url|g"       $cloud_config_file
 sed -i "s|__DNS_SERVICE_IP__|$DNS_SERVICE_IP|g"                   $cloud_config_file
+sed -i "s|__K8S_SERVICE_IP__|$K8S_SERVICE_IP|g"                   $cloud_config_file
 
 if [[ $master_hostname == "" ]]; then
 	sed -i 's|__ETCD_CLIENT_ENDPOINTS__|http://${PUBLIC_IP}:2379|g'                 $cloud_config_file

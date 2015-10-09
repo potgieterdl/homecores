@@ -242,23 +242,23 @@ Vagrant.configure("2") do |config|
     config.vm.provision :shell, keep_color: true,
                         :inline => "mkdir -p #{$KUBERNETES_SSL_PATH}"
 
-    config.vm.provision :file, :source => "#{$CA_PEM}", 
-                        :destination =>   "/tmp/#{$CA_PEM_NAME}"
+    #config.vm.provision :file, :source => "#{$CA_PEM}",
+    #                    :destination =>   "/tmp/#{$CA_PEM_NAME}"
 
     if $is_master == true
       # MASTER
-      config.vm.provision :file, :source => "#{$APISERVER_PEM}", 
-                          :destination =>   "/tmp/#{$APISERVER_PEM_NAME}"
+    #  config.vm.provision :file, :source => "#{$APISERVER_PEM}",
+    #                      :destination =>   "/tmp/#{$APISERVER_PEM_NAME}"
 
-      config.vm.provision :file, :source => "#{$APISERVER_KEY_PEM}", 
-                          :destination =>   "/tmp/#{$APISERVER_KEY_PEM_NAME}"
+    #  config.vm.provision :file, :source => "#{$APISERVER_KEY_PEM}",
+    #                      :destination =>   "/tmp/#{$APISERVER_KEY_PEM_NAME}"
 
-      config.vm.provision :shell, :privileged => true,
-          inline: <<-EOF
-          mv /tmp/#{$CA_PEM_NAME}            #{$KUBERNETES_SSL_PATH}
-          mv /tmp/#{$APISERVER_PEM_NAME}     #{$KUBERNETES_SSL_PATH}
-          mv /tmp/#{$APISERVER_KEY_PEM_NAME} #{$KUBERNETES_SSL_PATH}
-          EOF
+    #  config.vm.provision :shell, :privileged => true,
+    #      inline: <<-EOF
+    #      mv /tmp/#{$CA_PEM_NAME}            #{$KUBERNETES_SSL_PATH}
+    #      mv /tmp/#{$APISERVER_PEM_NAME}     #{$KUBERNETES_SSL_PATH}
+    #      mv /tmp/#{$APISERVER_KEY_PEM_NAME} #{$KUBERNETES_SSL_PATH}
+    #      EOF
     else
       # NODE
       config.vm.provision :file, :source => "#{$WORKER_PEM}", 
